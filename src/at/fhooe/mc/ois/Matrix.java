@@ -311,5 +311,18 @@ public class Matrix {
         return transformationNew;
     }
 
+    /**
+     * Liefert einen GeoDoublePoint, der mit der vorhandenen Transformationsmatrix multipliziert wurde.
+     * @param _pt Der GeoDoublePoint der zu multiplizieren ist
+     * @return Der transformierte GeoDoublePoint
+     */
+    public GeoDoublePoint multiply(GeoDoublePoint _pt) {
+        double srcx = _pt.getmX();
+        double srcy = _pt.getmY();
+        double destx = m11 * srcx + m12 * srcy;
+        double desty = m21 * srcx + m22 * srcy;
+        return new GeoDoublePoint(destx,desty);
+    }
+
 
 }

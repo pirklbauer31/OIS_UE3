@@ -133,11 +133,26 @@ public class GISController extends WindowAdapter implements ActionListener, Comp
                     BufferedImage imgToStore = mModel.getmObservers().get(0).getmPanel().getmImage();
                     File outputfile = new File("saved.png");
                     ImageIO.write(imgToStore, "png", outputfile);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
             }
+            case "scale": {
+                String[] scaleValues = mModel.getmObservers().get(0).getmTxtScale().getText().split(":");
+                if (isNumeric(scaleValues[0])) {
+                    if (scaleValues.length > 1) {
+                        if (isNumeric(scaleValues[1])) {
+                            mModel.zoom((double) mModel.calculateScale() / (double) Integer.valueOf(scaleValues[1]));
+                        }
+                    } else if (scaleValues.length == 1) {
+                        if (!scaleValues[0].equals("")) {
+                            mModel.zoom((double) mModel.calculateScale() / (double) Integer.valueOf(scaleValues[0]));
+                        }
+                    }
+                }
+            } break;
         }
 
 
@@ -325,6 +340,10 @@ public class GISController extends WindowAdapter implements ActionListener, Comp
 
             mStartPoint = _e.getPoint();
         }
+    }
+
+    public boolean isNumeric(String s) {
+        return s.matches("[-+]?\\d*\\.?\\d+");
     }
 
     /**

@@ -22,12 +22,19 @@ public class GISView implements DataObserver {
      * Das GISDialog Objekt, welches bei Doppelclick zu öffnen ist.
      */
     private GISDialog mDialog;
+    /**
+     * Das Textfeld für den Skalierungswert
+     */
+    TextField mTxtScale;
 
     public GISView (GISController _controller) {
         Frame mFrame = new Frame();
-        mFrame.setSize(600,400);
+        mFrame.setSize(740,480);
 
         mFrame.addWindowListener(_controller);
+
+        mTxtScale = new TextField(7);
+        mTxtScale.setText("1:unknown");
 
         Button mButtonL = new Button();
         mButtonL.setLabel("Load");
@@ -94,6 +101,11 @@ public class GISView implements DataObserver {
         mButtonStore.setBackground(Color.YELLOW);
         mButtonStore.setActionCommand("store");
         mButtonStore.addActionListener(_controller);
+        Button mButtonScale = new Button();
+        mButtonScale.setLabel("Scale");
+        mButtonScale.setBackground(Color.YELLOW);
+        mButtonScale.setActionCommand("scale");
+        mButtonScale.addActionListener(_controller);
 
 
         mPanel.setBackground(Color.lightGray);
@@ -121,7 +133,10 @@ public class GISView implements DataObserver {
         navigationPanel.add(mButtonRotateLeft);
         navigationPanel.add(mButtonRotateRight);
         navigationPanel.add(mButtonSticky);
+        navigationPanel.add(mTxtScale);
+        navigationPanel.add(mButtonScale);
         navigationPanel.add(mButtonStore);
+
         //mFrame.add(mButtonD, BorderLayout.SOUTH);
         //mFrame.add(mButtonZTF,BorderLayout.SOUTH);
 
@@ -163,5 +178,13 @@ public class GISView implements DataObserver {
 
     public void setmDialog(GISDialog _Dialog) {
         this.mDialog = _Dialog;
+    }
+
+    public TextField getmTxtScale() {
+        return mTxtScale;
+    }
+
+    public void setmTxtScale(TextField _txtScale) {
+        this.mTxtScale = _txtScale;
     }
 }

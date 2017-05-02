@@ -373,6 +373,7 @@ public class GISModel {
      */
     public void zoomToFit() {
         mMatrixTrans = Matrix.zoomToFit(getMapBounds(mGeoObjects), new Rectangle(0,0, mImageWidth, mImageHeight));
+        mObservers.get(0).getmTxtScale().setText("1:"+ calculateScale());
         updateObservers();
     }
 
@@ -388,6 +389,7 @@ public class GISModel {
         }
 
         mMatrixTrans = Matrix.zoomPoint(mMatrixTrans,new Point(mImageWidth/2,mImageHeight/2),_factor);
+        mObservers.get(0).getmTxtScale().setText("1:"+ calculateScale());
         updateObservers();
     }
     /**
@@ -404,6 +406,7 @@ public class GISModel {
         mMatrixTrans = Matrix.zoomPoint(mMatrixTrans,_pt,_factor);
         updateObservers();
     }
+
     /**
      * Ermittelt die gemeinsame BoundingBox der uebergebenen Polygone
      *
@@ -527,6 +530,16 @@ public class GISModel {
         return inversMatrix.multiply(_pt);
     }
 
+    /**
+     * Berechnet den aktuellen Skalierungsfaktor
+     * @return Der Skalierungsfaktor
+     */
+    protected int calculateScale() {
+        GeoDoublePoint vector = new GeoDoublePoint(0,1.0);
+        GeoDoublePoint vector_transformed = mMatrixTrans.multiply(vector);
+        return (int) ((1/vector_transformed.length())*(72/2.54));
+    }
+
     //Getters and setters
 
 
@@ -593,4 +606,5 @@ public class GISModel {
     public void setmObservers(ArrayList<GISView> _Observers) {
         this.mObservers = _Observers;
     }
+
 }

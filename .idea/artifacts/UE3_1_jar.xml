@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="UE3_1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/UE3_1_jar</output-path>
+    <root id="archive" name="UE3_1.jar">
+      <element id="module-output" name="UE3_1" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../postgis-jdbc-2.1.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../DummyServer/DummyGIS.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../postgresql-42.0.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

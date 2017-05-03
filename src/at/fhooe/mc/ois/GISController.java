@@ -213,7 +213,8 @@ public class GISController extends WindowAdapter implements ActionListener, Comp
             Transferable t = cb.getContents(this);
             try {
                 String oldClip = (String)t.getTransferData(DataFlavor.stringFlavor);
-                cb.setContents(new StringSelection(oldClip + "(" + mStartPoint.x + "/" + mStartPoint.y + ")\n"), new StringSelection("Coords"));
+                Point mapPoint = mModel.getMapPoint(mStartPoint);
+                cb.setContents(new StringSelection(oldClip + "(" + mapPoint.x + "/" + mapPoint.y + ")\n"), new StringSelection("Coords"));
 
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
@@ -222,7 +223,8 @@ public class GISController extends WindowAdapter implements ActionListener, Comp
             }
         }
         else {
-            cb.setContents(new StringSelection("(" + mStartPoint.x + "/" + mStartPoint.y + ")\n"), new StringSelection("Coords"));
+            Point mapPoint = mModel.getMapPoint(mStartPoint);
+            cb.setContents(new StringSelection("(" + mapPoint.x + "/" + mapPoint.y + ")\n"), new StringSelection("Coords"));
         }
 
     }
